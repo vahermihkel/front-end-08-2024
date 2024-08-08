@@ -1,6 +1,14 @@
 // import logo from './logo.svg'; kaks kaldkriipsu --> välja kommenteerimine
 import './App.css';
-import { Link, Route, Routes } from "react-router-dom";
+import { Navigate, Route, Routes } from "react-router-dom";
+import Avaleht from './pages/Avaleht';
+import Kinkekaart from './pages/Kinkekaart';
+import Esindused from './pages/Esindused';
+import LisaToode from './pages/LisaToode';
+import Ostukorv from './pages/Ostukorv';
+import NotFound from './pages/NotFound';
+import Menyy from './components/Menyy';
+import Seaded from './pages/Seaded';
 
 // kui on võimalus importida mitu asja, siis on {}
 // kui on võimalus importida ainult ühte asja, siis on ilma {}
@@ -10,36 +18,21 @@ function App() {
     <div className="App">
       {/* HTMLs välja kommenteerimine: ctrl + ä */}
       
-      <Link to="avaleht">
-        <img className="pilt" src="https://estonia.ee/wp-content/uploads/nobe_netist_4.jpg" alt="" />
-      </Link>
-
-      <Link to="kinkekaart">
-        <button className="nupp">Osta kinkekaart</button>
-      </Link>
-
-      <Link to="esindused">
-        <button className="nupp">Vaata meie esindusi</button>
-      </Link>
-
-      <Link to="lisa-toode">
-        <button className="nupp">Lisa uus toode</button>
-      </Link>
-
-      <Link to="ostukorv">
-        <button className="nupp">Ostukorvi</button>
-      </Link>
+      <Menyy />
 
 {/* localhost:3000/avaleht ---> siis näidatakse teksti "Olen avalehel" */}
       <Routes>
-        <Route path='avaleht' element={ <div>Olen avalehel</div> } />
-        <Route path='kinkekaart' element={ <div>Olen k</div> } />
-        <Route path='esindused' element={ <div>Olen esinduste lehel</div> } />
-        <Route path='lisa-toode' element={ <div>Olen lisa toote</div> } />
-        <Route path='ostukorv' element={ <div>Olen ostukorvi lehel</div> } />
+        <Route path='' element={ <Navigate to="avaleht" /> } />
+        <Route path='avaleht' element={ <Avaleht /> } />
+        <Route path='kinkekaart' element={ <Kinkekaart /> } />
+        <Route path='esindused' element={ <Esindused /> } />
+        <Route path='lisa-toode' element={ <LisaToode /> } />
+        <Route path='ostukorv' element={ <Ostukorv /> } />
+        <Route path='seaded' element={ <Seaded /> } />
+        <Route path='*' element={ <NotFound /> } />
       </Routes>
 
-      FOOTER
+      {/* FOOTER */}
 
     </div>
   );
