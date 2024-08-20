@@ -1,5 +1,6 @@
 import React from 'react'; // node_modulest tuleb kui ei ole ./ või ../ ees
 import ReactDOM from 'react-dom/client';
+import 'react-toastify/dist/ReactToastify.css';
 import './index.css';
 import App from './App';
 // import reportWebVitals from './reportWebVitals';

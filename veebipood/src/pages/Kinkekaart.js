@@ -1,4 +1,5 @@
 import React, { useRef, useState } from 'react'
+import { ToastContainer, toast } from 'react-toastify';
 
 // VÄRVID:
 // tumesinine - JavaScriptis liigitus, HTMLs liigitus
@@ -35,18 +36,46 @@ function Kinkekaart() {
   const [summa, muudaSumma] = useState(20);
   const [kogus, muudaKogus] = useState(1);
   const emailViide = useRef();
-  const [sonum, muudaSonum] = useState("");
+  // const [sonum, muudaSonum] = useState("");
+  const showEmailRef = useRef();
+  const [showEmail, setShowEmail] = useState(false);
 
   // function lisa() {
 
   // }
 
   const lisa = () => {
+    // .current -> kontrollib kas ta on HTMLs
+    // null -> tühjus, teab tüüpi, mis see tühjus on
+    // undefined -> tühjus, ei tea mis see tühjus on
+    // HTMLis olek on tühjus:
+    //if (emailViide.current === undefined) {
+    if (showEmailRef.current.checked === false) {
+      toast.info("Lisasid ostukorvi, aga ilma e-mailita!");
+      return;
+    }
+
     if (emailViide.current.value === "") {
-      muudaSonum("Tühja e-mailiga ei saa ostukorvi lisada!");
+      toast.error("Tühja e-mailiga ei saa ostukorvi lisada!");
+      // muudaSonum("Tühja e-mailiga ei saa ostukorvi lisada!");
       return; // return on funktsiooni lõpetaja --> siit enam edasi ei minda
     }
-    muudaSonum("Ostukorvi lisatud!");
+    // 01234
+    // neli@neli.ee
+    if (emailViide.current.value[4] !== "@") {
+  //if (emailViide.current.value.charAt(4) !== "@") {
+  //if (emailViide.current.value.startsWith("@", 4) === false) {
+      toast.error("Viies täht peab olema @ märk");
+      return;
+    }
+
+    toast.success("Ostukorvi lisatud!");
+    // muudaSonum("Ostukorvi lisatud!");
+  }
+
+  const muudaShowEmail = () => {
+    setShowEmail(showEmailRef.current.checked); // kui on checkboxist väärtuse lugemine, siis
+    // loetakse ref.current.checked    kui on muu, siis ref.current.value
   }
 
   return (
@@ -67,10 +96,27 @@ function Kinkekaart() {
 
       <br /><br />
 
-      <div>{sonum}</div>
-      <label>E-mail</label>
-      <input ref={emailViide} type="text" />
+      <input onClick={muudaShowEmail} ref={showEmailRef} id="email_checkbox" type="checkbox" />
+      <label htmlFor="email_checkbox">Saada kinkekaart e-mailile</label>
+
+      <br />
+      {/* <div>{sonum}</div> */}
+
+      { showEmail === true &&
+      <React.Fragment>
+        <label htmlFor="email">E-mail</label>
+        <input id="email" ref={emailViide} type="text" />
+      </React.Fragment>}
+      {/* React Fragment --> tühjus, sama mis tühjad nokad: <> </> */}
+
+      <br /><br />
       <button onClick={lisa}>Lisa ostukorvi</button>
+
+      <ToastContainer
+        position="bottom-right"
+        autoClose={4000}
+        theme="dark"
+        />
     </div>
   )
 }
