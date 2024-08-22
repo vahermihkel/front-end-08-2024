@@ -6,7 +6,9 @@ import React, { useState } from 'react'
 
 function Esindused() {
   //    muutuja, muutja   =         algväärtus
-  const [linn, muudaLinn] = useState("Pärnu");
+  const [linn, muudaLinn] = useState("Tallinn");
+  const [keskused, muudaKeskused] = useState(["Ülemiste", "Rocca al Mare", 
+                                      "Magistrali", "Vesse", "Kristiine", "Järveotsa"]);
 
   return (
     <div>
@@ -18,12 +20,13 @@ function Esindused() {
 
       {linn === "Tallinn" &&
       <div>
-        <div>Ülemiste</div>
+        {/* <div>Ülemiste</div>
         <div>Rocca al Mare</div>
         <div>Magistrali</div>
         <div>Vesse</div>
         <div>Kristiine</div>
-        <div>Järveotsa</div>
+        <div>Järveotsa</div> */}
+        {keskused.map(keskus => <div>{keskus} <button>Vt lähemalt</button> </div>)}
       </div>}
 
       {linn === "Tartu" &&
