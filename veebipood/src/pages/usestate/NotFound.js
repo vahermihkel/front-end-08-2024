@@ -1,15 +1,17 @@
 import React, { useState } from 'react'
 import Palgakalkulaator from '../../components/Palgakalkulaator'
 import Kalkulaator from '../../components/Kalkulaator'
+import { useTranslation } from 'react-i18next';
 
 function NotFound() {
   const [kalk, muudaKalk] = useState("palk");
+  const { t } = useTranslation();
 
   return (
     <div>
       <h3>404</h3>
-      <h4>Page not found</h4>
-      <div>Senimaani kuni õigele lehele lähed, arvuta oma palk:</div>
+      <h1>{t('page-not-found')}</h1>
+      <div>{t("calculate-salary")}</div>
       {kalk === "palk" &&         <div>
                                     <button onClick={() => muudaKalk("kalkulaator")}>Näita hoopis tavalist kalkulaatorit</button>
                                     <Palgakalkulaator />

@@ -1,19 +1,25 @@
 import React from 'react'
 import { Link } from "react-router-dom";
+import { useTranslation } from 'react-i18next';
 
 function Menyy() {
+  const { t, i18n } = useTranslation();
+
   return (
     <div>
        <Link to="avaleht">
         <img className="pilt" src="https://estonia.ee/wp-content/uploads/nobe_netist_4.jpg" alt="" />
       </Link>
 
+      <button onClick={() => i18n.changeLanguage("et")}>EST</button>
+      <button onClick={() => i18n.changeLanguage("en")}>ENG</button>
+
       <Link to="kinkekaart">
-        <button className="nupp">Osta kinkekaart</button>
+        <button className="nupp">{t("nav.giftcard")}</button>
       </Link>
 
       <Link to="esindused">
-        <button className="nupp">Vaata meie esindusi</button>
+        <button className="nupp">{t("nav.shops")}</button>
       </Link>
 
       <Link to="lisa-toode">
@@ -42,6 +48,32 @@ function Menyy() {
 
       <Link to="hinnad">
         <button className="nupp">Hinnad</button>
+      </Link>
+
+      <Link to="tootajad">
+        <button className="nupp">Töötajad</button>
+      </Link>
+
+      <Link to="tooted">
+        <button className="nupp">Tooted</button>
+      </Link>
+
+      <br /><br />
+
+      <Link to="halda-esindused">
+        <button className="nupp">Halda esindused</button>
+      </Link>
+
+      <Link to="halda-hinnad">
+        <button className="nupp">Halda hinnad</button>
+      </Link>
+
+      <Link to="halda-tootajad">
+        <button className="nupp">Halda töötajad</button>
+      </Link>
+
+      <Link to="halda-tooted">
+        <button className="nupp">Halda tooted</button>
       </Link>
     </div>
   )

@@ -1,6 +1,7 @@
 // simple react snippets: rfce
 
 import React, { useState } from 'react'
+import { ContactUs } from "../../components/Email";
 
 function Avaleht() {
   const [kogus, muudaKogus] = useState(0); // saab kokku liita, et oleks suurem number
@@ -25,6 +26,13 @@ function Avaleht() {
 
   return (
     <div>
+      <br />
+      <div>Anna meile tagasisidet:</div>
+      <ContactUs />
+      <br />
+      <br />
+      <br />
+
       <div>{laigitud === true && <img src="/laigitud.svg" alt="" /> }</div>
       <div>{laigitud === false && <img src="/mittelaigitud.svg" alt="" /> }</div>
       <button onClick={() => muudaLaigitud(true)}>Pane laik peale</button>
@@ -48,3 +56,10 @@ function Avaleht() {
 // if (true) { TEE_SEDA } else { KUI_EI_OLNUD_TÕSI }
 
 export default Avaleht
+
+
+
+// 16.00-19.00
+
+// E 18.00-21.15
+// K 17.30-20.45

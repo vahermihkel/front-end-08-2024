@@ -1,4 +1,6 @@
 import React, { useRef, useState } from 'react'
+import kasutajadFailist from "../../data/kasutajad.json";
+import { Link } from 'react-router-dom';
 
 function Profiil() {
   const aadressRef = useRef();
@@ -43,6 +45,17 @@ function Profiil() {
 
   return (
     <div>
+      <div>Meie kõik kasutajad:</div>
+      <div>{kasutajadFailist.map(kasutaja => 
+        <div key={kasutaja}>
+          {kasutaja}            {/* :nimi */}
+          <Link to={"/kasutaja/" + kasutaja}>
+            <button>Vt detailsemalt</button>
+          </Link>
+        </div>
+      )}</div>
+      <br /><br />
+
       <div>{sonum}</div>
       <div>Sinu aadress: {aadress}</div>
       <div>Sinu email: {email}</div>

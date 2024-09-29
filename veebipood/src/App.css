@@ -75,6 +75,10 @@ td, th {
   border-color: black; */
 }
 
+.halda th {
+  background-color: lightgray;
+}
+
 .protsent-aktiivne {
   background-color: blue;
 }
@@ -85,4 +89,17 @@ td, th {
 
 .kalkulaator td:active {
   background-color: rgb(245, 245, 245);
+}
+
+.pilt-mitteaktiivne {
+  height: 100px;
+  border-radius: 10px;
+  filter: grayscale(100%);
+  opacity: 50%;
+}
+
+.map {
+  height: 300px;
+  margin: 3%;
+  border-radius: 15px;
 }

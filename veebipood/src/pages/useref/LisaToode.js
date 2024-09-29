@@ -1,28 +1,45 @@
 import React, { useRef, useState } from 'react'
 import { ToastContainer, toast } from 'react-toastify';
+import tootedFailist from "../../data/tooted.json"
 
 function LisaToode() {
   const [sonum, muudaSonum] = useState("Lisa juurde üks toode");
   const nimiRef = useRef(); // inputi luger --> tema abil saan teada, mida kasutaja kirjutas
+  // const nimiRef = useRef();
+  const hindRef = useRef();
+  const piltRef = useRef();
+  const aktiivneRef = useRef();
 
-  function sisesta() {
-    //nimiRef.current.value; <-- nii siin ref-i seest väärtusi kätte
-    // true ? _ : _    ternary operator
-    if (nimiRef.current.value === "") {
-      muudaSonum("Tühja nimega toodet ei saa lisada!");
-      toast.error("Tühja nimega toodet ei saa lisada!");
-    } else {
-      muudaSonum("Toode lisatud: " + nimiRef.current.value);
-      toast.success("Toode lisatud: " + nimiRef.current.value);
+  const lisa = () => {
+    tootedFailist.push(
+    {
+      "nimi": nimiRef.current.value,
+      "hind": hindRef.current.value,
+      "pilt": piltRef.current.value,
+      "aktiivne": aktiivneRef.current.value
     }
-  }
+  );
+    // uuendaTooted(tootedFailist.slice());
+    muudaSonum("Edukalt toode lisatud!")
+    toast.success("Edukalt toode lisatud!");
+}
 
   return (
     <div>
       <div>{sonum}</div>
-      <label>Toote nimi</label> <br />
+      {/* <label>Toote nimi</label> <br />
       <input ref={nimiRef} type="text" /> <br />
-      <button onClick={sisesta}>Sisesta</button> <br />
+      <button onClick={sisesta}>Sisesta</button> <br /> */}
+      <label>Toote nimetus</label> <br />
+      <input ref={nimiRef}  type="text" /> <br />
+      <label>Toote hind</label> <br />
+      <input ref={hindRef}  type="text" /> <br />
+      <label>Toote pilt</label> <br />
+      <input ref={piltRef}  type="text" /> <br />
+      <label>Toote olemasolu</label> <br />
+      <input ref={aktiivneRef}  type="text" /> <br />
+      
+      <button onClick={lisa}>Lisa</button> <br />
 
       <ToastContainer
         position="bottom-right"

@@ -1,5 +1,6 @@
 import React, { useRef, useState } from 'react'
 import { ToastContainer, toast } from 'react-toastify';
+import ostukorvFailist from "../../data/ostukorv.json";
 
 // VÄRVID:
 // tumesinine - JavaScriptis liigitus, HTMLs liigitus
@@ -16,7 +17,7 @@ import { ToastContainer, toast } from 'react-toastify';
 // suure tähega ja roheline HTMLs - sisseimporditud HTML
 // roheline - kommentaar
 // heleroheline - number
-//{{{{{{{{{{{{{[[[[[((((([[{[]}]])))))]]]]]}}}}}}}}}}}}}
+// {{{{{{{{{{{{{[[[[[((((([[{[]}]])))))]]]]]}}}}}}}}}}}}}
 
 // kaks kaldkriipsu --> kommentaar
 // () ---> sulg funktsiooni jaoks
@@ -52,6 +53,12 @@ function Kinkekaart() {
     //if (emailViide.current === undefined) {
     if (showEmailRef.current.checked === false) {
       toast.info("Lisasid ostukorvi, aga ilma e-mailita!");
+      ostukorvFailist.push({
+            "nimi": `Kinkekaart ${summa}€ - ${kogus} tk`, 
+            "hind": summa * kogus, 
+            "pilt": "PILT.jpg", 
+            "aktiivne": true
+          });
       return;
     }
 
@@ -69,8 +76,24 @@ function Kinkekaart() {
       return;
     }
 
+    // kui pushin ostukorvi faili
+    // kui pushin toodete faili
+    // alati peab kuju olema: 
+    // {"nimi": "Pakiautomaat", "hind": 3, "pilt": "PILT.jpg", "aktiivne": true}
+    // ostukorvFailist.push({"nimi": "Kinkekaart " + kogus + " tk", "hind": summa * kogus, "pilt": "PILT.jpg", "aktiivne": true});
+    ostukorvFailist.push({
+  //  "nimi": "Kinkekaart " + summa + "€ - " + kogus + " tk",
+      "nimi": `Kinkekaart ${summa}€ - ${kogus} tk`, 
+      "hind": summa * kogus, 
+      "pilt": "PILT.jpg", 
+      "aktiivne": true
+    });
     toast.success("Ostukorvi lisatud!");
     // muudaSonum("Ostukorvi lisatud!");
+
+    // "" <-- samaväärsed
+    // '' <-- samaväärsed
+    // `` <-- back-tick. siia sisse saab muutujaid kirjutada sõnade vahele
   }
 
   const muudaShowEmail = () => {
