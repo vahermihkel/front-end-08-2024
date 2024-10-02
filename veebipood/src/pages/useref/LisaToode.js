@@ -1,6 +1,7 @@
 import React, { useRef, useState } from 'react'
 import { ToastContainer, toast } from 'react-toastify';
-import tootedFailist from "../../data/tooted.json"
+import tootedFailist from "../../data/tooted.json";
+import keskusedFailist from "../../data/keskused.json";
 
 function LisaToode() {
   const [sonum, muudaSonum] = useState("Lisa juurde üks toode");
@@ -9,6 +10,7 @@ function LisaToode() {
   const hindRef = useRef();
   const piltRef = useRef();
   const aktiivneRef = useRef();
+  const keskusRef = useRef();
 
   const lisa = () => {
     tootedFailist.push(
@@ -16,6 +18,7 @@ function LisaToode() {
       "nimi": nimiRef.current.value,
       "hind": hindRef.current.value,
       "pilt": piltRef.current.value,
+      "keskus": keskusRef.current.value,
       "aktiivne": aktiivneRef.current.value
     }
   );
@@ -34,6 +37,12 @@ function LisaToode() {
       <input ref={nimiRef}  type="text" /> <br />
       <label>Toote hind</label> <br />
       <input ref={hindRef}  type="text" /> <br />
+
+      <label>Toote keskus</label> <br />
+      <select ref={keskusRef}>
+        {keskusedFailist.map(keskus => <option>{keskus.nimi}</option>)}
+      </select><br />
+
       <label>Toote pilt</label> <br />
       <input ref={piltRef}  type="text" /> <br />
       <label>Toote olemasolu</label> <br />

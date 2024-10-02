@@ -1,18 +1,21 @@
 import React, { useState } from 'react'
 import { Link } from "react-router-dom"
-import ostukorvFailist from "../../data/ostukorv.json"
+import Pakiautomaadid from '../api/Pakiautomaadid';
+// import ostukorvFailist from "../../data/ostukorv.json"
 
 // suure tähega ja rohelised 
 // HTMLs tuleb kõik importida
 // "SMTH is not defined." kui pole imporditud
 
 function Ostukorv() { // lehele tulles võetakse algväärtus useState sulgude seest
-  const [ostukorv, muudaOstukorv] = useState(ostukorvFailist.slice());
+  const [ostukorv, muudaOstukorv] = useState(JSON.parse(localStorage.getItem("ostukorv")) || []);
 
   const lisaPakiautomaat = () => {
     //muudaOstukorv(["Coca", "Fanta", "Sprite", "Red bull"])
-    ostukorvFailist.push({"nimi": "Pakiautomaat", "hind": 3, "pilt": "PILT.jpg", "aktiivne": true});
-    muudaOstukorv(ostukorvFailist.slice());
+    ostukorv.push({"nimi": "Pakiautomaat", "hind": 3, "pilt": "PILT.jpg", "aktiivne": true});
+    localStorage.setItem("ostukorv", JSON.stringify(ostukorv));
+
+    muudaOstukorv(ostukorv.slice());
   }
 
   // const lisaVichy = () => {
@@ -23,18 +26,21 @@ function Ostukorv() { // lehele tulles võetakse algväärtus useState sulgude s
 
             // seda sulgu täites, ütlen et saan selle muutuja sisu kätte onClick sulgude seest
   const lisa = (uusToode) => {
-    ostukorvFailist.push(uusToode);
-    muudaOstukorv(ostukorvFailist.slice());
+    ostukorv.push(uusToode);
+    localStorage.setItem("ostukorv", JSON.stringify(ostukorv)); // salvestuseks
+    muudaOstukorv(ostukorv.slice()); // HTMLi uuenduseks
   }
               // kui tuleb sulgude seest tühjus/sõna, siis konventeerib 0-ks
   const kustuta = (index) => {
-    ostukorvFailist.splice(index,1);
-    muudaOstukorv(ostukorvFailist.slice());
+    ostukorv.splice(index,1);
+    localStorage.setItem("ostukorv", JSON.stringify(ostukorv));
+    muudaOstukorv(ostukorv.slice());
   }
 
   const tyhjenda = () => {
-    ostukorvFailist.splice(0); // alates 0st, lõpuni välja kustutab
-    muudaOstukorv(ostukorvFailist.slice());
+    ostukorv.splice(0); // alates 0st, lõpuni välja kustutab
+    localStorage.setItem("ostukorv", JSON.stringify(ostukorv));
+    muudaOstukorv(ostukorv.slice());
   }
 
   // reegel: kõik muutujad võiks teha esimesena "const" ja kui on vajadus teda teist korda
@@ -71,9 +77,9 @@ function Ostukorv() { // lehele tulles võetakse algväärtus useState sulgude s
 
   return (
     <div>
-      <div>Kokku: {ostukorv.length} tk</div>
+      {ostukorv.length > 0 && <div>Kokku: {ostukorv.length} tk</div>}
 
-      <button onClick={lisaPakiautomaat}>Lisa lõppu pakiautomaat juurde</button>
+      {ostukorv.length > 0 && <button onClick={lisaPakiautomaat}>Lisa lõppu pakiautomaat juurde</button>}
       {/* <button onClick={lisaVichy}>Lisa lõppu Vichy juurde</button> */}
 
       {ostukorv.length > 0 && <button onClick={tyhjenda}>Tühjenda</button>}
@@ -100,7 +106,10 @@ function Ostukorv() { // lehele tulles võetakse algväärtus useState sulgude s
         <Link to="/avaleht">Mine avalehele</Link>
       </div>}
 
-      <div>Kokku: {arvutaHinnadKokku()} €</div>
+        <br />
+      {ostukorv.length > 0 && <Pakiautomaadid />}
+        <br />
+       {ostukorv.length > 0 && <div>Kokku: {arvutaHinnadKokku()} €</div>}
       
     </div>
   )

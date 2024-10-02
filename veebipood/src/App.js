@@ -31,18 +31,32 @@ import MuudaTootaja from './pages/muuda/MuudaTootaja';
 import Meny from './components/Meny';
 import AdminHalda from './pages/halda/AdminHalda';
 import Shops from './pages/usestate/Shops';
+import { useState } from 'react';
+import Tarnija from './pages/api/Tarnija';
 
 // kui on võimalus importida mitu asja, siis on {}
 // kui on võimalus importida ainult ühte asja, siis on ilma {}
 
 function App() {
+  const [dark, setDark] = useState(localStorage.getItem("tume-leht"));
+
+  const muudaTumedaks = () => {
+    setDark("true");
+    localStorage.setItem("tume-leht", "true");
+  }
+
+  const muudaHeledaks = () => {
+    setDark("false");
+    localStorage.setItem("tume-leht", "false");
+  }
+
   return (
-    <div className="App">
-      {/* HTMLs välja kommenteerimine: ctrl + ä */}
+    <div className={dark === "true" ? "App-dark" : "App"}>
       
       <Meny />
+      <button onClick={muudaTumedaks}>Dark mode</button>
+      <button onClick={muudaHeledaks}>Light mode</button>
 
-{/* localhost:3000/avaleht ---> siis näidatakse teksti "Olen avalehel" */}
       <Routes>
         <Route path='' element={ <Navigate to="avaleht" /> } />
         <Route path='avaleht' element={ <Avaleht /> } />
@@ -76,6 +90,7 @@ function App() {
 
         <Route path='admin' element={ <AdminHalda /> } />
         <Route path='shops' element={ <Shops /> } />
+        <Route path='tarnija' element={ <Tarnija /> } />
 
         <Route path='*' element={ <NotFound /> } />
       </Routes>
@@ -125,7 +140,16 @@ export default App;
 // xxxxxx16.09   17.30-20.45xxxxxxxxxxxx
 // 18.09   17.30-20.45
 // E 23.09   17.30-20.45 ---> Kodus: Webshop saab kodus lõpetatud
-// E 30.09   17.30-20.45 -> LocalStorage + API päringud ---> KOJU: hunnik faile
+// K 02.10   14.30-17.45 -> LocalStorage + API päringud ---> KOJU: hunnik faile
 //                       ->                                  KOJU: Proovitöö
-// E 07.10   17.30-20.45 Andmebaas                           KOJU: Lõpuprojekt
+// K 09.10   14.30-17.45 Andmebaas                           KOJU: Lõpuprojekt
 // E 21.10   17.30-19.00   ---> lõpuprojekti esitlemine
+
+//4.  KOJU: hunnik faile
+//3.  KOJU: Proovitöö --> Google Drive
+//2.  KOJU: Webshopis
+//2.  localStorage ostukorvis
+//2.  localStorage keele ära salvestamisel
+
+//1. Firebase-i üles panna
+//1. luua uus andmebaas

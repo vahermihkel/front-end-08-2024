@@ -24,6 +24,7 @@ return (
             {tooted.map((toode, index) => 
               <div key={index}>
               {index}. {toode.nimi} - {toode.hind} - {toode.pilt} - {toode.aktiivne}
+              <b>{toode.keskus}</b>
                 <button onClick={() => kustuta(index)}>x</button>       
                 <Link to={"/muuda-toode/" + index}>
                   <button>Muuda</button> 

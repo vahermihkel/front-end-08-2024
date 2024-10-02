@@ -1,5 +1,5 @@
 import React, {useState} from 'react'
-import ostukorvFailist from "../../data/ostukorv.json"
+// import ostukorvFailist from "../../data/ostukorv.json"
 import tootedFailist from "../../data/tooted.json"
 
 function Tooted() {
@@ -23,13 +23,31 @@ function Tooted() {
   // Halda failis pane tähele, et kustutaksid ja lisaksid faili
   // .slice() <-- mälukoha katkemiseks (koopia tegemiseks), 
   //                et ei muudaks kogemata originaali
-  const lisaOstukorvi = (uusToode) => {
-    ostukorvFailist.push(uusToode);
-    // ei pea HTMLi uuendama, sest ostukorvi nimekiri ei pea siin HTMLs
-    // uuenema
 
-    // hot-toast või toastify hüpikaken koos sisuga "Ostukorvi lisatud"
+
+
+
+  const lisaOstukorvi = (uusToode) => {
+    //ostukorvFailist.push(uusToode);
+                      // "[Coca, Fanta, Sprite]"
+    const ostukorvLS = JSON.parse(localStorage.getItem("ostukorv")) || [];
+    ostukorvLS.push(uusToode);
+    localStorage.setItem("ostukorv", JSON.stringify(ostukorvLS));
   }
+
+  // localStorage-sse Array panemiseks:
+  // 1. võtma vanad väärtused localStoragest ( localStorage.getItem )
+  // 1.b kui vanasid väärtusi pole, siis võta tühi array ( || [] )
+  // 2. võtma jutumärgid võetud väärtusel maha ( JSON.parse() )
+  // 3. lisama ühe toote array'sse juurde ( .push() )
+  // 4. panema jutumärgid array ümber tagasi ( JSON.stringify() )
+  // 5. panema localStorage-sse tagasi ( localStorage.setItem() )
+
+
+
+
+
+
 
 
      //kui koopiat ei tee, siis toimub muteerumine (originaali kallale minek) 

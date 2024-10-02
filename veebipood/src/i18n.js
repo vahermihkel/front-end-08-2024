@@ -11,6 +11,8 @@ const resources = {
       "calculate-salary": "While you go to the right page, calculate your salary:",
       "nav.giftcard": "Buy giftcard",
       "nav.shops": "Look our shops",
+      "nav.haldama": "Admin view",
+      "Ülemiste keskus": "Ülemiste center"
     }
   },
   et: {
@@ -19,6 +21,8 @@ const resources = {
       "calculate-salary": "Senimaani kuni õigele lehele lähed, arvuta oma palk:",
       "nav.giftcard": "Osta kinkekaart",
       "nav.shops": "Vaata meie esindusi",
+      "nav.haldama": "Admini vaade",
+      "Ülemiste keskus": "Ülemiste keskus"
     }
   }
 };
@@ -27,7 +31,10 @@ i18n
   .use(initReactI18next) // passes i18n down to react-i18next
   .init({
     resources,
-    lng: "et", // language to use, more information here: https://www.i18next.com/overview/configuration-options#languages-namespaces-resources
+      // <> parempoolne alt
+      // võta localStoragest (parem klõps -> inspect -> application -> Local storage -> localhost:3000)
+      // || kui ei ole localStorages sellist võtit, siis võta || parempoolne
+    lng: localStorage.getItem("keel") || "et", // language to use, more information here: https://www.i18next.com/overview/configuration-options#languages-namespaces-resources
     // you can use the i18n.changeLanguage function to change the language manually: https://www.i18next.com/overview/api#changelanguage
     // if you're using a language detector, do not define the lng option
 

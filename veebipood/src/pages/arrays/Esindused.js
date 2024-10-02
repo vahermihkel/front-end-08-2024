@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import keskusedFailist from "../../data/keskused.json"
 import { Link } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 // ../ <--- kausta võrra üles
 // ../ "arrays" kaustast ülespoole (olen pages sees)
 // ../../ "arrays" ja "pages" kaustast ülespoole (olen src sees)
@@ -14,6 +15,7 @@ function Esindused() {
   //    muutuja, muutja   =         algväärtus
   const [linn, muudaLinn] = useState("Tallinn");
   const [keskused, muudaKeskused] = useState(keskusedFailist.slice());
+  const { t } = useTranslation();
 
   const reset = () => {
     muudaKeskused(keskusedFailist.slice());
@@ -124,7 +126,7 @@ function Esindused() {
         <div>Järveotsa</div> */}
         {keskused.map((keskus, index) => 
           <div key={keskus.nimi}>
-            {keskus.nimi} - {keskus.tel}
+            {t(keskus.nimi)} - {keskus.tel}
             <Link to={"/esindus/" + index}>
               <button>Vt lähemalt</button> 
             </Link>

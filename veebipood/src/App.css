@@ -2,6 +2,18 @@
   text-align: center;
 }
 
+.App-dark {
+  text-align: center;
+  background-color: black;
+  color: white;
+  min-height: 100vh;
+}
+
+/* px, % - protsent lehest, aga parent elemendist
+vh --> vaate kõrgus protsentides
+vw --> vaate laius protsentides
+*/
+
 .pilt {
   /* width: 100px; */
   height: 100px;
@@ -103,3 +115,4 @@ td, th {
   margin: 3%;
   border-radius: 15px;
 }
+
